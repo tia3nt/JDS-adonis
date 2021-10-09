@@ -39,3 +39,48 @@ test('create report when given valid data', async ({ assert, client }) => {
           user_id: user.id,
       })
 }).timeout(0);
+
+test('should reject request if no project_id', async ({
+  assert,
+  client,
+}) => {
+
+  const user = await Factory.model('App/Models/User').create()
+  
+  const { 
+    divisi_id,
+    task,
+    category,
+    place,
+    task_date,
+    link,
+  } = await Factory.model(
+        'App/Models/Report'
+    ).make()
+
+  const data = {
+    divisi_id,
+    task,
+    category,
+    place,
+    task_date,
+    link,
+  }
+
+  const response = await client
+      .post('/new/report')
+      .loginVia(user, 'jwt')
+      .send(data)
+      .end()
+
+  console.log('error', response.error)
+
+  response.assertStatus(400)
+  response.assertJSONSubset([
+    {
+        message: 'project_id is missing',
+        field: 'project_id',
+        validation: 'required',
+    },
+  ])
+}).timeout(0);

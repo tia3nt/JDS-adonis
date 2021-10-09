@@ -21,3 +21,15 @@ Factory.blueprint('App/Models/User', (faker) => {
     password: 'user123',
   }
 })
+
+Factory.blueprint('App/Models/Report', faker => {
+    return {
+        divisi_id: faker.string({ length: 6, numeric: true }),
+        project_id: faker.string({ length: 6, numeric: true }),
+        task: faker.sentence({ length: 200 }),
+        category: faker.string({ length: 50 }),
+        place: faker.sentence({ length: 200 }),
+        task_date: '2021-10-01',
+        link: faker.url(),
+    }
+})
