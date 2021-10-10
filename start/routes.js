@@ -37,3 +37,7 @@ Route
   .put(`/update/report/:id`, 'ReportController.update')
   .validator('UpdateReport')
   .middleware(['auth']);
+
+Route
+  .delete(`/report/:id`, 'ReportController.destroy')
+  .middleware(['auth']);

@@ -65,6 +65,20 @@ class ReportController {
 
         return response.ok(report)
     }
+
+    async destroy({ response, params, auth }) {
+        const user = await auth.getUser()
+
+        const report = await Report.findOrFail(params.id)
+
+        if (report.user_id !== user.id) {
+            throw new UnauthorizedException();
+        }
+
+        await report.delete()
+
+        return response.noContent();
+    }
 }
 
 module.exports = ReportController
