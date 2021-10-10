@@ -30,3 +30,5 @@ Route
     .middleware(['auth']);
 
 Route.get('/all/report', 'ReportController.all');
+
+Route.get('report/:id', 'ReportController.show')
