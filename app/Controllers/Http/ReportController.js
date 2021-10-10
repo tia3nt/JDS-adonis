@@ -35,8 +35,36 @@ class ReportController {
 
     return response.ok(report)
   }
+
+  async update ({ 
+      response, 
+      request, 
+      params,
+      auth
+    }) {
+
+        const user = await auth.getUser()
+
+        const report = await Report.findOrFail(params.id)
+
+        if (report.user_id !== user.id) {
+            throw new UnauthorizedException();
+        }
+
+        report.merge(request.only([
+          'divisi_id', 
+          'project_id', 
+          'task', 
+          'category', 
+          'place', 
+          'task_date', 
+          'link'
+        ]));
+
+        await report.save();
+
+        return response.ok(report)
+    }
 }
-
-
 
 module.exports = ReportController

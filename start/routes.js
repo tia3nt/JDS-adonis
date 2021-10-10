@@ -17,18 +17,23 @@
 const Route = use('Route')
 
 Route
-    .post('users', 'UserController.store')
-    .validator('User');
+  .post('users', 'UserController.store')
+  .validator('User');
 
 Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 });
 
 Route
-    .post('/new/report', 'ReportController.store')
-    .validator('ReportController')
-    .middleware(['auth']);
+  .post('/new/report', 'ReportController.store')
+  .validator('ReportController')
+  .middleware(['auth']);
 
 Route.get('/all/report', 'ReportController.all');
 
-Route.get('report/:id', 'ReportController.show')
+Route.get('report/:id', 'ReportController.show');
+
+Route
+  .put(`/update/report/:id`, 'ReportController.update')
+  .validator('UpdateReport')
+  .middleware(['auth']);
