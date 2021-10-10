@@ -18,7 +18,7 @@ const Route = use('Route')
 
 Route
     .post('users', 'UserController.store')
-    .validator('User')
+    .validator('User');
 
 Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
@@ -27,4 +27,6 @@ Route.get('/', () => {
 Route
     .post('/new/report', 'ReportController.store')
     .validator('ReportController')
-    .middleware(['auth'])
+    .middleware(['auth']);
+
+Route.get('/all/report', 'ReportController.all');

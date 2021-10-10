@@ -8,7 +8,7 @@ class ReportSchema extends Schema {
     this.create('reports', (table) => {
       table.increments()
       table.string('divisi_id', 6)
-      table.string('project_id', 6)
+      table.string('project_id', 6).notNullable()
       table.string('task', 200)
       table.string('category', 50)
       table.string('place', 200)

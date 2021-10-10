@@ -19,6 +19,14 @@ class ReportController {
             })
         return response.created(report)
     }
+    async all ({ request, response }) {
+        
+        const report = await Report.all()
+        
+        return response.ok(report)
+    }
 }
+
+
 
 module.exports = ReportController
